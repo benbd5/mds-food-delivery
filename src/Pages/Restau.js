@@ -15,9 +15,9 @@ class Restau extends React.Component {
 
    // Actualise la data toutes les 0.5s
    componentDidMount(){
-    // this.timer = setInterval(() => {
+    this.timer = setInterval(() => {
       this.getData();
-    // }, 500)
+    }, 500)
   }
 
   // clearInterval va toujours avec setInterval

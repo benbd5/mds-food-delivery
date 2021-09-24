@@ -1,0 +1,14 @@
+.restau {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.card-restaurants {
+  width: 250px;
+  word-break: break-all;
+}
+
+img {
+  width: 250px;
+}

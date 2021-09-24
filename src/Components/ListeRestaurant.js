@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Restaurants from './Restaurants';
+import './styles/Restaurants.css'
 
 class ListeRestaurant extends React.Component {
   render() {
