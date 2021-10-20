@@ -18,7 +18,7 @@ class Restaurant extends React.Component {
     return (
       <div className='card-restaurants'>
         {restau.Photos &&
-          <img src={`https://strapi.myidea.fr/${restau.Photos[0].url}`} />}
+          <img src={`https://strapi.myidea.fr/${restau.Photos[0].url}`} alt='restaurant' />}
         <h3 className='title-restaurant'>{restau.name}</h3>
         <p className='content-restaurant'>{restau.description}</p>
       </div>

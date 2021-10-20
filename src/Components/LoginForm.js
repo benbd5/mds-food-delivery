@@ -1,35 +1,46 @@
 import { useState } from 'react'
+import TextInput from './TextInput'
 
 // On extrait submit et error en paramètres depuis Auth.js (au lieu de faire props.error etc)
 const LoginForm = ({ submit, error }) => {
-  const [email, setEmail] = useState('test3@test.fr')
-  const [password, setPassword] = useState('12345678')
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  })
+
+  // Gestion de la saisie formulaire
+  const handleChange = (e) => {
+    setFormData({
+      // Conserver les autres saisies de champs
+      ...formData,
+      // Champ modifié ou ajouté
+      [e.target.name]: e.target.value
+    })
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    submit({ email, password })
+    submit(formData)
   }
 
   return (
     <form onSubmit={handleSubmit}>
       <br />
-      <label>
-        Email
-        <input
-          type='text'
-          value={email}
-          onChange={(e) => { setEmail(e.target.value) }}
-        />
-      </label>
+      <TextInput
+        type='email'
+        label='Email'
+        name='email'
+        value={formData.email}
+        onChange={handleChange}
+      />
       <br />
-      <label>
-        Mot de passe :
-        <input
-          type='password'
-          value={password}
-          onChange={(e) => { setPassword(e.target.value) }}
-        />
-      </label>
+      <TextInput
+        type='password'
+        label='Password'
+        name='password'
+        value={formData.password}
+        onChange={handleChange}
+      />
       <br />
       <input type='submit' value='Se connecter' />
       {

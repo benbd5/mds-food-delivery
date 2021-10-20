@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import LoginForm from '../Components/LoginForm'
+import RegisterForm from '../Components/RegisterForm'
 import UserInfo from '../Components/UserInfo'
 
-import { login } from '../services/api'
+import { login, register } from '../services/api'
 
 // Composant sous forme de fonction
 // Nouvelle méthode
@@ -11,6 +12,7 @@ function Auth () {
 
   const [error, setError] = useState(null)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isRegister, setIsRegister] = useState(false)
 
   // Appelé à chaque montage dans le DOM
   useEffect(() => {
@@ -21,10 +23,16 @@ function Auth () {
   }, [])
 
   // Soumission du formulaire
-  // credentials car on reçoit l'objet avec email, password depuis LoginForm.js
-  const handleSubmit = async (credentials) => {
+  // infos car on reçoit l'objet avec email, password, etc depuis Register/LoginForm.js
+  const handleSubmit = async (infos) => {
+    let data
+
     // Appel de la fonction d'API login
-    const data = await login(credentials)
+    if (isRegister) {
+      data = await register(infos)
+    } else {
+      data = await login(infos)
+    }
 
     if (data.error) {
       setError(data.error)
@@ -49,10 +57,29 @@ function Auth () {
       {
         isLoggedIn
           ? <UserInfo logout={logout} />
-          : <LoginForm
-              submit={handleSubmit}
-              error={error}
-            />
+          : (
+            <div>
+              {
+                isRegister
+                  ? <RegisterForm
+                      submit={handleSubmit}
+                      error={error}
+                    />
+                  : <LoginForm
+                      submit={handleSubmit}
+                      error={error}
+                    />
+              }
+              <a
+                href='#'
+                onClick={() => setIsRegister(!isRegister)}
+                className='isRegister'
+              >
+                {isRegister ? 'J\'ai déjà un compte' : 'Je n\'ai pas de compte'}
+
+              </a>
+            </div>
+            )
       }
     </div>
   )

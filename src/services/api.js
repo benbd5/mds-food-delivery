@@ -36,6 +36,27 @@ const login = async (credentials) => {
   }
 }
 
+const register = async (RegisterInfos) => {
+  try {
+    const response = await api.post('/auth/register', RegisterInfos)
+
+    // Sauvegarde du token dans le localStorage
+    if (response.data && response.data.token) {
+      window.localStorage.setItem('token', response.data.token)
+    }
+    return {
+      error: null,
+      data: response.data
+    }
+  } catch (error) {
+    console.error(error)
+    return {
+      error: error,
+      data: null
+    }
+  }
+}
+
 const getRestaurants = async () => {
   try {
     const response = await api.get('/restaurants')
@@ -46,6 +67,7 @@ const getRestaurants = async () => {
 }
 
 export {
-  getRestaurants,
-  login
+  login,
+  register,
+  getRestaurants
 }
