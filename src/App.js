@@ -9,6 +9,7 @@ import './App.css'
 import Header from './Components/Header'
 import Restau from './Pages/Restau'
 import Home from './Pages/Home'
+import Auth from './Pages/Auth'
 
 class App extends React.Component {
   render () {
@@ -17,6 +18,9 @@ class App extends React.Component {
         <Router>
           <Header />
           <Switch>
+            <Route path='/auth'>
+              <Auth />
+            </Route>
             <Route path='/restaurants'>
               <Restau />
             </Route>

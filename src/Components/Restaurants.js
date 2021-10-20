@@ -2,26 +2,28 @@ import React from 'react'
 
 import './styles/Restaurants.css'
 
-class Restaurants extends React.Component {
+class Restaurant extends React.Component {
   // getImageRestaurant() {
   //   this.props.restau.Photos[0].url;
   //   `https://strapi.myidea.fr/{id}/uploads/`
   // }
 
   render () {
-    if (!this.props.restau) {
+    const { restau } = this.props
+    if (!restau) {
       return (
         <p>Pas de données</p>
       )
     }
     return (
       <div className='card-restaurants'>
-        <img src={`https://strapi.myidea.fr/${this.props.restau.Photos[0].url}`} />
-        <h3 className='title-restaurant'>{this.props.restau.title}</h3>
-        <p className='content-restaurant'>{this.props.restau.description}</p>
+        {restau.Photos &&
+          <img src={`https://strapi.myidea.fr/${restau.Photos[0].url}`} />}
+        <h3 className='title-restaurant'>{restau.name}</h3>
+        <p className='content-restaurant'>{restau.description}</p>
       </div>
     )
   }
 }
 
-export default Restaurants
+export default Restaurant

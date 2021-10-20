@@ -13,6 +13,9 @@ class Header extends React.Component {
             <li>
               <Link to='/restaurants'>Restaurants</Link>
             </li>
+            <li>
+              <Link to='/auth'>Auth</Link>
+            </li>
           </ul>
         </nav>
       </div>
