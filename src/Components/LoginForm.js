@@ -26,6 +26,8 @@ const LoginForm = ({ submit, error }) => {
   return (
     <form onSubmit={handleSubmit}>
       <br />
+      Se connecter
+      <br />
       <TextInput
         type='email'
         label='Email'

@@ -7,27 +7,36 @@ import {
 
 import './App.css'
 import Header from './Components/Header'
-import Restau from './Pages/Restau'
+import Restaurants from './Pages/Restaurants'
 import Home from './Pages/Home'
 import Auth from './Pages/Auth'
+import Restaurant from './Pages/Restaurant'
+import Cart from './Components/Cart'
+import { CartProvider } from './contexts/CartContext'
 
 class App extends React.Component {
   render () {
     return (
       <div className='App'>
         <Router>
-          <Header />
-          <Switch>
-            <Route path='/auth'>
-              <Auth />
-            </Route>
-            <Route path='/restaurants'>
-              <Restau />
-            </Route>
-            <Route path='/'>
-              <Home />
-            </Route>
-          </Switch>
+          <CartProvider>
+            <Header />
+            <Cart />
+            <Switch>
+              <Route path='/auth'>
+                <Auth />
+              </Route>
+              <Route path='/restaurant/:id'>
+                <Restaurant />
+              </Route>
+              <Route path='/restaurants'>
+                <Restaurants />
+              </Route>
+              <Route path='/'>
+                <Home />
+              </Route>
+            </Switch>
+          </CartProvider>
         </Router>
       </div>
     )

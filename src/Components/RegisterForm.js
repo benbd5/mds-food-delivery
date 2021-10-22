@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import TextInput from './TextInput'
 
-function RegisterForm ({ submit, error }) {
+function RegisterForm({ submit, error }) {
   // Stockage des données du formulaire
   // On déclare un état pour tous les champs
   const [formData, setFormData] = useState({
@@ -63,7 +63,7 @@ function RegisterForm ({ submit, error }) {
           value={formData.phone}
           onChange={handleChange}
         />
-        <input type='submit' value='Sinscrire' />
+        <input type='submit' value='Sinscrire' className='submit' />
       </form>
     </div>
   )

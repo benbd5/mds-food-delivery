@@ -3,7 +3,7 @@ import LoginForm from '../Components/LoginForm'
 import RegisterForm from '../Components/RegisterForm'
 import UserInfo from '../Components/UserInfo'
 
-import { login, register } from '../services/api'
+import { getProfile, login, register } from '../services/api'
 
 // Composant sous forme de fonction
 // Nouvelle méthode
@@ -13,6 +13,7 @@ function Auth () {
   const [error, setError] = useState(null)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [isRegister, setIsRegister] = useState(false)
+  const [profil, setProfil] = useState(null)
 
   // Appelé à chaque montage dans le DOM
   useEffect(() => {
@@ -47,6 +48,11 @@ function Auth () {
     }
   }
 
+  const handleLoadProfile = async () => {
+    const profile = await getProfile()
+    setProfil(profile)
+  }
+
   const logout = () => {
     setIsLoggedIn(false)
     window.localStorage.removeItem('token', null)
@@ -73,14 +79,14 @@ function Auth () {
               <a
                 href='#'
                 onClick={() => setIsRegister(!isRegister)}
-                className='isRegister'
               >
-                {isRegister ? 'J\'ai déjà un compte' : 'Je n\'ai pas de compte'}
-
+                {isRegister ? "J'ai déjà un compte" : "Je n'ai pas de compte"}
               </a>
             </div>
             )
       }
+      <button onClick={handleLoadProfile}>Load Profile</button>
+      <p>{profil && JSON.stringify(profil)}</p>
     </div>
   )
 }

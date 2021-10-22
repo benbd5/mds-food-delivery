@@ -57,6 +57,22 @@ const register = async (RegisterInfos) => {
   }
 }
 
+const getProfile = async () => {
+  try {
+    const token = window.localStorage.getItem('token')
+    if (token) {
+      const response = await api.get('/me', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      return response.data
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 const getRestaurants = async () => {
   try {
     const response = await api.get('/restaurants')
@@ -66,8 +82,19 @@ const getRestaurants = async () => {
   }
 }
 
+const getDishesByRestaurant = async (restaurantId) => {
+  try {
+    const response = await api.get(`/dishes?id=${restaurantId}`)
+    return (response.data)
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 export {
   login,
   register,
-  getRestaurants
+  getProfile,
+  getRestaurants,
+  getDishesByRestaurant
 }

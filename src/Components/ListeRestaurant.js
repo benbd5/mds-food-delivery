@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Restaurants from './Restaurants'
+import RestaurantListItem from './RestaurantListItem'
 import './styles/Restaurants.css'
 
 class ListeRestaurant extends React.Component {
@@ -13,7 +13,7 @@ class ListeRestaurant extends React.Component {
     return (
       <div className='restau'>
         {this.props.restau.map((restau) => {
-          return <Restaurants {...this.props} key={restau._id} restau={restau} />
+          return <RestaurantListItem {...this.props} key={restau._id} restau={restau} />
         })}
       </div>
     )

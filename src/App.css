@@ -60,3 +60,12 @@ ul {
 li a {
   color: white;
 }
+
+/* ----------------- */
+.submit {
+  padding: 10px;
+  border-radius: 7px;
+  border: none;
+  background-color: black;
+  color: white;
+}

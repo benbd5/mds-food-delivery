@@ -4,7 +4,7 @@ import '../App.css'
 import ListeRestaurant from '../Components/ListeRestaurant'
 import { getRestaurants } from '../services/api'
 
-class Restau extends React.Component {
+class Restaurants extends React.Component {
   constructor(props) {
     super(props)
     // Etat :
@@ -41,4 +41,4 @@ class Restau extends React.Component {
   }
 }
 
-export default Restau
+export default Restaurants
