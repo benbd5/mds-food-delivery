@@ -11,12 +11,13 @@ import Restaurants from './Pages/Restaurants'
 import Home from './Pages/Home'
 import Auth from './Pages/Auth'
 import Restaurant from './Pages/Restaurant'
+import Order from './Pages/Order'
 import Cart from './Components/Cart'
 import { CartProvider } from './contexts/CartContext'
 import { AuthProvider } from './contexts/AuthContext'
 
 class App extends React.Component {
-  render() {
+  render () {
     return (
       <div className='App'>
         <Router>
@@ -25,6 +26,9 @@ class App extends React.Component {
               <Header />
               <Cart />
               <Switch>
+                <Route path='/order'>
+                  <Order />
+                </Route>
                 <Route path='/auth'>
                   <Auth />
                 </Route>

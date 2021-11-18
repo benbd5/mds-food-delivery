@@ -20,7 +20,7 @@ function DishListItem ({ dishes }) {
     <div className='card-restaurants'>
       <h3 className='title-restaurant'>{dishes.title}</h3>
       <p className='content-restaurant'>{dishes.description}</p>
-      <p className='content-restaurant'>Prix : {dishes.price}€</p>
+      <p className='content-restaurant'>Prix : {dishes.price.toFixed(2)}€</p>
       <p className='content-restaurant'>{dishes.category}</p>
       <p className='content-restaurant'>{dishes.restaurant}</p>
       <button onClick={addToCart}>Ajouter au panier</button>
