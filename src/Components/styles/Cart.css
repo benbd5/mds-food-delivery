@@ -4,3 +4,9 @@
   min-width: 300px;
   background-color: aquamarine;
 }
+
+.cart-container div {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

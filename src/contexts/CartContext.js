@@ -39,13 +39,24 @@ const CartReducer = (state, action) => {
               // On retourne les items concernés par le changement de quantité
               return item
             }
-          })
+          }),
+          // Calcul du total du panier, si le panier contient des items on les additionne avec la méthode array.reduce()
+          // Sinon, on retourne le prix du produit courant
+          total: state.cart.length > 0
+            ? state.cart.reduce((prev, cur) => prev + (cur.dish.price * cur.quantity), action.data.price)
+            : action.data.price
         }
       } else {
         // On ajoute l'item et on retourne un nouvel état
         // ...state = on conserve l'état courant
         // On concatène le tableau de l'état courant avec notre item à ajouter
-        return { ...state, cart: state.cart.concat([{ dish: action.data, quantity: 1 }]) }
+        return {
+          ...state,
+          cart: state.cart.concat([{ dish: action.data, quantity: 1 }]),
+          total: state.cart.length > 0
+            ? state.cart.reduce((prev, cur) => prev + (cur.dish.price * cur.quantity), action.data.price)
+            : action.data.price
+        }
       }
 
     case actionTypes.REMOVE_ITEM_FROM_CARD:
@@ -59,7 +70,10 @@ const CartReducer = (state, action) => {
           } else {
             return item
           }
-        }).filter(item => item.quantity > 0) // Le filter retourne tout ce qui ce correspond à une quantité > 0 (retire les éléments dont quantité < 1)
+        }).filter(item => item.quantity > 0), // Le filter retourne tout ce qui ce correspond à une quantité > 0 (retire les éléments dont quantité < 1)
+        total: state.cart.length > 0
+          ? state.cart.reduce((prev, cur) => prev + (cur.dish.price * cur.quantity), -action.data.dish.price)
+          : 0
       }
 
     default:
