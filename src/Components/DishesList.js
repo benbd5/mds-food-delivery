@@ -1,6 +1,6 @@
 import DishListItem from './DishListItem'
 
-function DishesList({ dishes }) {
+function DishesList ({ dishes }) {
   if (!dishes || dishes.length < 1) {
     return (
       <p>Aucun plat</p>

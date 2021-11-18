@@ -1,12 +1,12 @@
 import React from 'react'
-import { useCart, actions } from '../contexts/CartContext'
+import { useCart, actionTypes } from '../contexts/CartContext'
 
 function DishListItem ({ dishes }) {
   const { dispatch } = useCart()
 
   const addToCart = () => {
     dispatch({
-      type: actions.ADD_ITEM_TO_CARD,
+      type: actionTypes.ADD_ITEM_TO_CARD,
       data: dishes
     })
   }

@@ -1,14 +1,14 @@
 import Draggable from 'react-draggable'
-import { actions, useCart } from '../contexts/CartContext'
+import { actionTypes, useCart } from '../contexts/CartContext'
 
 import './styles/Cart.css'
 
-function Cart() {
+function Cart () {
   const { state: { cart }, dispatch } = useCart()
 
   const removeItem = (item) => {
     dispatch({
-      type: actions.REMOVE_ITEM_FROM_CARD,
+      type: actionTypes.REMOVE_ITEM_FROM_CARD,
       data: item
     })
   }
