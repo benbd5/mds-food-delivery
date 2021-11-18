@@ -5,7 +5,7 @@
  * 2) Brancher le contexte sur les plats et sur le composant Cart
  * - Ajouter le CART PROVIDER dans le App.js
  */
-import React from 'react'
+import React, { useEffect } from 'react'
 
 // Création du contexte
 const CartContext = React.createContext()
@@ -17,8 +17,9 @@ const actionTypes = {
 }
 
 // Etat inital
-const initalState = {
-  cart: []
+const initalState = JSON.parse(window.localStorage.getItem('CART')) || {
+  cart: [],
+  total: 0
 }
 
 const CartReducer = (state, action) => {
@@ -84,6 +85,10 @@ const CartReducer = (state, action) => {
 // Composant Provider
 const CartProvider = ({ children }) => {
   const [state, dispatch] = React.useReducer(CartReducer, initalState)
+
+  useEffect(() => {
+    window.localStorage.setItem('CART', JSON.stringify(state))
+  }, [state])
 
   return <CartContext.Provider value={{ state, dispatch }}>{children}</CartContext.Provider>
 }

@@ -4,9 +4,11 @@ function OrderResume ({ cart, total }) {
       <h1>Votre commande</h1>
       <table>
         <thead>
-          <th>Plat</th>
-          <th>Quantité</th>
-          <th>Prix</th>
+          <tr>
+            <th>Plat</th>
+            <th>Quantité</th>
+            <th>Prix</th>
+          </tr>
         </thead>
         <tbody>
           {

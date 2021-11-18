@@ -49,7 +49,7 @@ const LoginForm = ({ submit, error }) => {
         error &&
         (
           <div>
-            <h4>Identifiants invalides</h4>
+            <h4>{JSON.stringify(error)}</h4>
           </div>
         )
       }

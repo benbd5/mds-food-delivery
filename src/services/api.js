@@ -18,20 +18,9 @@ const api = axios.create({
 const login = async (credentials) => {
   try {
     const response = await api.post('/auth/login', credentials)
-
-    // Sauvegarde du token dans le localStorage
-    if (response.data && response.data.token) {
-      window.localStorage.setItem('token', response.data.token)
-    }
-    return {
-      error: null,
-      data: response.data
-    }
+    return response.data
   } catch (error) {
-    return {
-      error: error.response.data,
-      data: null
-    }
+    throw new Error(error.message)
   }
 }
 
@@ -90,10 +79,20 @@ const getDishesByRestaurant = async (restaurantId) => {
   }
 }
 
+const createPaymentSession = async (cart, FormData) => {
+  try {
+    const response = await api.post('/payment/create-session', { order: { cart, FormData } })
+    return response.data
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 export {
   login,
   register,
   getProfile,
   getRestaurants,
-  getDishesByRestaurant
+  getDishesByRestaurant,
+  createPaymentSession
 }

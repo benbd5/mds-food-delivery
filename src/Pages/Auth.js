@@ -3,9 +3,9 @@ import LoginForm from '../Components/LoginForm'
 import RegisterForm from '../Components/RegisterForm'
 import UserInfo from '../Components/UserInfo'
 
-import { getProfile, login, register } from '../services/api'
+import { getProfile, register } from '../services/api'
 
-import { loginUser, useAuth } from '../contexts/AuthContext'
+import { actionTypes, loginUser, useAuth } from '../contexts/AuthContext'
 
 // Composant sous forme de fonction
 // Nouvelle méthode
@@ -15,15 +15,15 @@ function Auth () {
   const [isRegister, setIsRegister] = useState(false)
   const [profil, setProfil] = useState(null)
 
-  const { dispatch, state: { error }, loading } = useAuth()
+  const { dispatch, state: { error, user, loading } } = useAuth()
 
-  // Appelé à chaque montage dans le DOM
   useEffect(() => {
-    const token = window.localStorage.getItem('token')
-    if (token) {
+    if (user) {
       setIsLoggedIn(true)
+    } else {
+      setIsLoggedIn(false)
     }
-  }, [])
+  }, [user])
 
   // Soumission du formulaire
   // infos car on reçoit l'objet avec email, password, etc depuis Register/LoginForm.js
@@ -36,12 +36,6 @@ function Auth () {
     } else {
       await loginUser(infos, dispatch)
     }
-
-    const token = window.localStorage.getItem('token')
-
-    if (token) {
-      setIsLoggedIn(true)
-    }
   }
 
   const handleLoadProfile = async () => {
@@ -50,8 +44,9 @@ function Auth () {
   }
 
   const logout = () => {
-    setIsLoggedIn(false)
-    window.localStorage.removeItem('token', null)
+    dispatch({
+      type: actionTypes.LOGOUT
+    })
   }
 
   return (
