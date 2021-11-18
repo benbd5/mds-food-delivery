@@ -13,29 +13,32 @@ import Auth from './Pages/Auth'
 import Restaurant from './Pages/Restaurant'
 import Cart from './Components/Cart'
 import { CartProvider } from './contexts/CartContext'
+import { AuthProvider } from './contexts/AuthContext'
 
 class App extends React.Component {
-  render () {
+  render() {
     return (
       <div className='App'>
         <Router>
           <CartProvider>
-            <Header />
-            <Cart />
-            <Switch>
-              <Route path='/auth'>
-                <Auth />
-              </Route>
-              <Route path='/restaurant/:id'>
-                <Restaurant />
-              </Route>
-              <Route path='/restaurants'>
-                <Restaurants />
-              </Route>
-              <Route path='/'>
-                <Home />
-              </Route>
-            </Switch>
+            <AuthProvider>
+              <Header />
+              <Cart />
+              <Switch>
+                <Route path='/auth'>
+                  <Auth />
+                </Route>
+                <Route path='/restaurant/:id'>
+                  <Restaurant />
+                </Route>
+                <Route path='/restaurants'>
+                  <Restaurants />
+                </Route>
+                <Route path='/'>
+                  <Home />
+                </Route>
+              </Switch>
+            </AuthProvider>
           </CartProvider>
         </Router>
       </div>

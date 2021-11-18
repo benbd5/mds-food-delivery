@@ -5,15 +5,17 @@ import UserInfo from '../Components/UserInfo'
 
 import { getProfile, login, register } from '../services/api'
 
+import { loginUser, useAuth } from '../contexts/AuthContext'
+
 // Composant sous forme de fonction
 // Nouvelle méthode
 function Auth () {
   // Initialisation des états locaux
-
-  const [error, setError] = useState(null)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [isRegister, setIsRegister] = useState(false)
   const [profil, setProfil] = useState(null)
+
+  const { dispatch, state: { error }, loading } = useAuth()
 
   // Appelé à chaque montage dans le DOM
   useEffect(() => {
@@ -32,13 +34,7 @@ function Auth () {
     if (isRegister) {
       data = await register(infos)
     } else {
-      data = await login(infos)
-    }
-
-    if (data.error) {
-      setError(data.error)
-    } else {
-      setError(null)
+      await loginUser(infos, dispatch)
     }
 
     const token = window.localStorage.getItem('token')

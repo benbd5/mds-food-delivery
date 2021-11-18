@@ -28,9 +28,8 @@ const login = async (credentials) => {
       data: response.data
     }
   } catch (error) {
-    console.error(error)
     return {
-      error: error,
+      error: error.response.data,
       data: null
     }
   }
