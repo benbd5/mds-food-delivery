@@ -16,6 +16,7 @@ import Cart from './Components/Cart'
 import { CartProvider } from './contexts/CartContext'
 import { AuthProvider } from './contexts/AuthContext'
 import Success from './Pages/Success'
+import Cancel from './Pages/Cancel'
 
 class App extends React.Component {
   render () {
@@ -27,6 +28,9 @@ class App extends React.Component {
               <Header />
               <Cart />
               <Switch>
+                <Route path='/cancel'>
+                  <Cancel />
+                </Route>
                 <Route path='/success'>
                   <Success />
                 </Route>
