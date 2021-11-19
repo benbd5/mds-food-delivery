@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useCart, actionTypes } from '../contexts/CartContext'
 import { createOrder } from '../services/api'
 
-function Success() {
+function Success () {
   const [loading, setLoading] = useState(false)
   const [order, setOrder] = useState(null)
   const { state: { cart }, dispatch } = useCart()
