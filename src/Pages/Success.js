@@ -1,15 +1,11 @@
 import { useState, useEffect } from 'react'
-import { useCart } from '../contexts/CartContext'
+import { useCart, actionTypes } from '../contexts/CartContext'
 import { createOrder } from '../services/api'
 
-function Success () {
+function Success() {
   const [loading, setLoading] = useState(false)
   const [order, setOrder] = useState(null)
-  const { state: { cart } } = useCart()
-
-  if (cart.length > 0) {
-    // Vider le panier
-  }
+  const { state: { cart }, dispatch } = useCart()
 
   useEffect(() => {
     const sendOrder = async () => {
@@ -18,11 +14,23 @@ function Success () {
       console.log(result)
       if (result && result._id) {
         setOrder(result)
+        if (cart.length > 0) {
+          // Vider le panier
+          dispatch({ type: actionTypes.RESET_CART })
+          window.localStorage.removeItem('ORDER_USER')
+        }
         setLoading(false)
       }
     }
-    sendOrder()
+
+    if (window.localStorage.getItem('ORDER_USER')) {
+      sendOrder()
+    }
   }, [])
+
+  if (!window.localStorage.getItem('ORDER_USER') && !order) {
+    return <h1>Aucune commande en cours</h1>
+  }
 
   if (loading) {
     return <h>Chargement ...</h>

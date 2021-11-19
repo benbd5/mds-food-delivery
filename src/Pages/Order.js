@@ -22,7 +22,9 @@ function Order () {
     // On enregistre les infos de l'utilisateur dans le localstorage pour les réutiliser
     window.localStorage.setItem('ORDER_USER', JSON.stringify(formData))
     const result = await createPaymentSession(cart, formData)
-    window.location = result.url
+    if (result && result.url) {
+      window.location = result.url
+    }
   }
 
   return (

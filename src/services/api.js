@@ -79,9 +79,9 @@ const getDishesByRestaurant = async (restaurantId) => {
   }
 }
 
-const createPaymentSession = async (cart, FormData) => {
+const createPaymentSession = async (cart, formData) => {
   try {
-    const response = await api.post('/payment/create-session', { order: { cart, FormData } })
+    const response = await api.post('/payment/create-session', { order: { cart, formData } })
     return response.data
   } catch (error) {
     console.error(error)

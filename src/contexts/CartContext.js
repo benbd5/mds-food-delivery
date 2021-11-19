@@ -13,7 +13,8 @@ const CartContext = React.createContext()
 // Création des actionTypes
 const actionTypes = {
   ADD_ITEM_TO_CARD: 'ADD_ITEM_TO_CARD',
-  REMOVE_ITEM_FROM_CARD: 'REMOVE_ITEM_FROM_CARD'
+  REMOVE_ITEM_FROM_CARD: 'REMOVE_ITEM_FROM_CARD',
+  RESET_CART: 'RESET_CART'
 }
 
 // Etat inital
@@ -76,6 +77,10 @@ const CartReducer = (state, action) => {
           ? state.cart.reduce((prev, cur) => prev + (cur.dish.price * cur.quantity), -action.data.dish.price)
           : 0
       }
+
+    case actionTypes.RESET_CART:
+      window.localStorage.removeItem('CART')
+      return { cart: [], total: 0 }
 
     default:
       throw new Error(`Unhandled action type : ${action.type}`)
