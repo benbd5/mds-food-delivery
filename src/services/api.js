@@ -88,11 +88,23 @@ const createPaymentSession = async (cart, FormData) => {
   }
 }
 
+const createOrder = async (user, cart) => {
+  try {
+    // On recompose un tableau contenant les ID des plats du panier pour respecter le format de l'api
+    const _cart = cart.map(item => item.dish._id)
+    const response = await api.post('/order', { user, cart: _cart })
+    return response.data
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 export {
   login,
   register,
   getProfile,
   getRestaurants,
   getDishesByRestaurant,
-  createPaymentSession
+  createPaymentSession,
+  createOrder
 }
